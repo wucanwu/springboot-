@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.lepao</groupId>
+  <artifactId>parent-project</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+    <!-- 配置需要的属性 -->
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.targer>1.8</maven.compiler.targer>
+		<lombok.version>1.16.20</lombok.version>
+		<mybatis-plus-version>3.1.0</mybatis-plus-version>
+		<project.version>0.0.1-SNAPSHOT</project.version>
+    </properties>
+    <!-- 不引入依賴注入，只是聲明版本 -->
+    <dependencyManagement>
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-dependencies</artifactId>
+			<version>Finchley.M8</version>
+			<type>pom</type>
+			<scope>import</scope>
+		</dependency>
+		<dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>2.0.0.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>${lombok.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.baomidou</groupId>
+			<artifactId>mybatis-plus-boot-starter</artifactId>
+			<version>${mybatis-plus-version}</version>
+		</dependency>
+	</dependencies>
+    </dependencyManagement>
+    <repositories>
+        <repository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/milestone</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>repository.springframework.maven.release</id>
+            <name>Spring Framework Maven Release Repository</name>
+            <url>http://maven.springframework.org/milestone/</url>
+        </repository>
+        <repository>
+            <id>org.springframework</id>
+            <url> http://maven.springframework.org/snapshot</url>
+        </repository>
+        <repository>
+            <id>spring-milestone</id>
+            <name>Spring Maven MILESTONE Repository</name>
+            <url>http://repo.spring.io/libs-milestone</url>
+        </repository>
+        <repository>
+            <id>spring-release</id>
+            <name>Spring Maven RELEASE Repository</name>
+            <url>http://repo.spring.io/libs-release</url>
+        </repository>
+    </repositories>
+    <!-- 配置actuator解析 -->
+    <build>
+    <finalName>lepao</finalName>
+    <resources>
+    <resource>
+    <directory>src/main/resources</directory>
+    <filtering>true</filtering>
+    </resource>
+    </resources>
+    <plugins>
+    <plugin>
+    <!-- <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-resources-plugin</artifactId> -->
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-maven-plugin</artifactId>
+    <version>3.1.0</version>
+    <configuration>
+    <delimiters>
+    <delimiter>$</delimiter>
+    </delimiters>
+    </configuration>
+    </plugin>
+    </plugins>
+    </build>
+    <modules>
+    	<module>lepao-api</module>
+    	<module>eureka-8001</module>
+    	<module>lepao-provider-dept-7001</module>
+    	<module>lepao-comsumer-dept-80</module>
+    <module>eureka-8002</module>
+    <module>eureka-8003</module>
+    <module>lepao-comsumer-dept-7002</module>
+    <module>lepao-provider-dept-7002</module>
+    <module>lepao-provider-dept-7003</module>
+    <module>lepao-comsumer-dept-feign</module>
+    <module>lepao-zuul-dept</module>
+  </modules>
+</project>
